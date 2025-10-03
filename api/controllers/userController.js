@@ -1,69 +1,11 @@
 import User from '../../backend/models/User.js';
 import { successResponse, errorResponse, asyncHandler } from '../../backend/utils/helpers.js';
 
-// In-memory storage for demo purposes
-let users = [
-  new User('1', 'User-1', 'user1@example.com', new Date('2023-01-15')), // Old member with 2 projects
-  new User('2', 'User-2', 'user2@example.com', new Date('2023-02-20')) // Project owner with similar access
-];
+// In-memory storage (demo users removed)
+let users = [];
 
 // Track user's projects and participations
-const userProjects = {
-  '1': {
-    ownedProjects: [
-      {
-        id: 'p1',
-        title: 'AI Image Recognition App',
-        description: 'An application that uses machine learning to identify objects in images',
-        stage: 'Beta Testing',
-        industry: 'Technology',
-        createdAt: '2023-05-20'
-      },
-      {
-        id: 'p2',
-        title: 'Smart Home IoT System',
-        description: 'A comprehensive IoT system for home automation and energy efficiency',
-        stage: 'MVP Development',
-        industry: 'IoT',
-        createdAt: '2023-09-15'
-      }
-    ],
-    participatingProjects: [
-      {
-        id: 'p3',
-        title: 'Healthcare Monitoring Platform',
-        description: 'A platform for remote patient monitoring and health data analysis',
-        stage: 'Market Ready',
-        industry: 'Healthcare',
-        createdAt: '2023-11-10'
-      }
-    ]
-  },
-  '2': {
-    ownedProjects: [
-      {
-        id: 'p2',
-        title: 'Smart Home IoT System',
-        description: 'A comprehensive IoT system for home automation and energy efficiency',
-        stage: 'MVP Development',
-        industry: 'IoT',
-        createdAt: '2023-09-15',
-        originalOwner: 'User-1',
-        transferredAt: '2024-01-10'
-      }
-    ],
-    participatingProjects: [
-      {
-        id: 'p1',
-        title: 'AI Image Recognition App',
-        description: 'An application that uses machine learning to identify objects in images',
-        stage: 'Beta Testing',
-        industry: 'Technology',
-        createdAt: '2023-05-20'
-      }
-    ]
-  }
-};
+const userProjects = {};
 
 const userController = {
   // Get all users

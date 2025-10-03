@@ -201,6 +201,17 @@ function Dashboard() {
     return `${Math.floor(diffInDays / 30)} months ago`;
   };
 
+  // Map user role to display title (match Profile page behavior)
+  const getRoleDisplayTitle = (role) => {
+    const roleMap = {
+      'founder': 'The Founder',
+      'professional': 'The Professional',
+      'investor': 'The Investor',
+      'student': 'The Student'
+    };
+    return roleMap[role] || role || 'Developer';
+  };
+
   // If user is not authenticated, show a message
   if (!user) {
     return (
@@ -305,7 +316,7 @@ function Dashboard() {
                       />
                       <div className="applicant-details">
                         <h4>{application.applicantName}</h4>
-                        <p>{application.position}</p>
+                        <p className="profile-title">{applicationTab === 'sent' ? (user.title || getRoleDisplayTitle(user.role)) : (user.title || 'Member')}</p>
                         <span>Applied {getRelativeTime(application.appliedDate)}</span>
                       </div>
                     </div>

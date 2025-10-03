@@ -17,6 +17,17 @@ import { X, Github, Linkedin, Globe, Twitter, Instagram, Phone, Mail } from 'luc
 function ProfileModal({ user, onClose }) {
   const [activeTab, setActiveTab] = useState('about');
 
+  // Map user role to display title (match Profile page behavior)
+  const getRoleDisplayTitle = (role) => {
+    const roleMap = {
+      'founder': 'The Founder',
+      'professional': 'The Professional',
+      'investor': 'The Investor',
+      'student': 'The Student'
+    };
+    return roleMap[role] || role || 'Developer';
+  };
+
   // If no user is provided, return null
   if (!user) return null;
 
@@ -32,7 +43,7 @@ function ProfileModal({ user, onClose }) {
           <UserAvatar user={user} size="large" className="profile-avatar" />
           <div className="profile-basic-info">
             <h2>{user.name}</h2>
-            <p className="profile-title">{user.title || 'Member'}</p>
+            <p className="profile-title">{user.title || getRoleDisplayTitle(user.role)}</p>
             {user.location && <p className="profile-location">{user.location}</p>}
           </div>
         </div>

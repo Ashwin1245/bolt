@@ -14,7 +14,7 @@ function AuthModal({ onClose, onSuccess }) {
     agreeToTerms: false
   });
   const [loading, setLoading] = useState(false);
-  const { login, demoUsers, loginAsDemoUser } = useAuth();
+  const { login } = useAuth();
 
   const handleInputChange = (e) => {
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
@@ -97,19 +97,7 @@ function AuthModal({ onClose, onSuccess }) {
     }, 1000);
   };
 
-  const handleDemoUserLogin = (userId) => {
-    setLoading(true);
-
-    // Small delay for UI feedback
-    setTimeout(() => {
-      const success = loginAsDemoUser(userId);
-      setLoading(false);
-
-      if (success) {
-        onSuccess(demoUsers.find(user => user.id === userId));
-      }
-    }, 500);
-  };
+  // Demo user login disabled
 
   return (
     <div className="modal-overlay" onClick={onClose}>
@@ -137,30 +125,7 @@ function AuthModal({ onClose, onSuccess }) {
         </div>
 
         <div className="auth-content">
-          {/* Demo Users Section */}
-          <div className="demo-users-section">
-            <h3 className="demo-users-title">Demo User</h3>
-            <div className="demo-users-container">
-              {demoUsers && demoUsers.map(user => (
-                <button
-                  key={user.id}
-                  className="demo-user-btn"
-                  onClick={() => handleDemoUserLogin(user.id)}
-                  disabled={loading}
-                >
-                  <div className="demo-user-avatar">
-                    {user.name.charAt(0)}
-                  </div>
-                  <div className="demo-user-info">
-                    <span className="demo-user-name">{user.name}</span>
-                    <span className="demo-user-type">
-                      Experienced Member
-                    </span>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
+          {/* Demo Users Section removed */}
 
           <div className="divider">
             <span>or</span>

@@ -224,7 +224,7 @@ function CreateProjectModal({ onClose, projectToEdit }) {
     } else {
       // For new projects, add the current user as a founder
       projectData.teamMembers = [
-        { id: user.id, name: user.name, role: "Founder" },
+        { id: user.id, name: user.name, role: "Founder", email: user.email },
         ...processedTeamMembers
       ];
       createProject(projectData);

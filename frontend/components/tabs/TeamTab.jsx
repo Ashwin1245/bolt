@@ -5,7 +5,7 @@ import UserAvatar from '../UserAvatar';
 import './Tabs.css';
 
 function TeamTab({ project, isAdmin }) {
-  const { user, demoUsers } = useAuth();
+  const { user } = useAuth();
   const [confirmingRemoval, setConfirmingRemoval] = useState(null);
   const teamListRef = useRef(null);
 
@@ -64,13 +64,7 @@ function TeamTab({ project, isAdmin }) {
     }
   };
 
-  const getMemberEmail = (member) => {
-    if (member?.email) return member.email;
-    const found = Array.isArray(demoUsers)
-      ? demoUsers.find((u) => u.id?.toString() === member?.id?.toString())
-      : null;
-    return found?.email || '';
-  };
+  const getMemberEmail = (member) => member?.email || '';
 
   return (
     <div className="team-section">

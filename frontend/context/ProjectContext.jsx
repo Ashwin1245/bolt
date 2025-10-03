@@ -107,90 +107,6 @@ export const ProjectProvider = ({ children }) => {
   useEffect(() => {
     // Initialize with sample data
     const sampleProjects = [
-      // User-1's owned projects
-      {
-        id: 'p1',
-        title: "AI Image Recognition App",
-        description: "An application that uses machine learning to identify objects in images",
-        stage: "Beta Testing",
-        industry: "Technology",
-        requiredSkills: ["Python", "TensorFlow", "React Native"],
-        teamMembers: [
-          { id: '1', name: "User-1", role: "Founder", avatar: "/api/placeholder/40/40" },
-          { id: '3', name: "Alex Johnson", role: "ML Engineer", avatar: "/api/placeholder/40/40" }
-        ],
-        openPositions: [
-          { role: "Frontend Developer", skills: ["React Native", "TypeScript"], isPaid: true },
-          { role: "UX Designer", skills: ["UI/UX", "Figma"], isPaid: false }
-        ],
-        funding: "₹30,00,000",
-        applications: 8,
-        createdAt: "2023-05-20",
-        ownerId: '1'
-      },
-      {
-        id: 'p2',
-        title: "Smart Home IoT System",
-        description: "A comprehensive IoT system for home automation and energy efficiency",
-        stage: "MVP Development",
-        industry: "IoT",
-        requiredSkills: ["IoT", "Node.js", "React", "Embedded Systems"],
-        teamMembers: [
-          { id: '1', name: "User-1", role: "Founder", avatar: "/api/placeholder/40/40" },
-          { id: '4', name: "Sarah Lee", role: "IoT Specialist", avatar: "/api/placeholder/40/40" }
-        ],
-        openPositions: [
-          { role: "Backend Developer", skills: ["Node.js", "MongoDB"], isPaid: true },
-          { role: "Hardware Engineer", skills: ["Arduino", "Raspberry Pi"], isPaid: false }
-        ],
-        funding: "₹25,00,000",
-        applications: 5,
-        createdAt: "2023-09-15",
-        ownerId: '1'
-      },
-      // Project where User-1 is participating
-      {
-        id: 'p3',
-        title: "Healthcare Monitoring Platform",
-        description: "A platform for remote patient monitoring and health data analysis",
-        stage: "Market Ready",
-        industry: "Healthcare",
-        requiredSkills: ["React", "Node.js", "Data Analysis", "Healthcare"],
-        teamMembers: [
-          { id: '5', name: "Dr. Emily Wong", role: "Founder", avatar: "/api/placeholder/40/40" },
-          { id: '1', name: "User-1", role: "Developer", avatar: "/api/placeholder/40/40" },
-          { id: '6', name: "Michael Brown", role: "Healthcare Expert", avatar: "/api/placeholder/40/40" }
-        ],
-        openPositions: [
-          { role: "Data Scientist", skills: ["Python", "Machine Learning"], isPaid: true }
-        ],
-        funding: "₹50,00,000",
-        applications: 15,
-        createdAt: "2023-11-10",
-        ownerId: '5'
-      },
-      // Additional project where User-1 is participating
-      {
-        id: 'p4',
-        title: "E-Learning Mobile App",
-        description: "An interactive mobile application for personalized learning experiences",
-        stage: "Beta Testing",
-        industry: "Education",
-        requiredSkills: ["React Native", "Firebase", "UI/UX", "Education"],
-        teamMembers: [
-          { id: '7', name: "Priya Mehta", role: "Founder", avatar: "/api/placeholder/40/40" },
-          { id: '1', name: "User-1", role: "Mobile Developer", avatar: "/api/placeholder/40/40" },
-          { id: '8', name: "Rahul Singh", role: "Education Specialist", avatar: "/api/placeholder/40/40" }
-        ],
-        openPositions: [
-          { role: "Backend Developer", skills: ["Node.js", "MongoDB"], isPaid: false },
-          { role: "Content Creator", skills: ["Education", "Writing"], isPaid: false }
-        ],
-        funding: "₹35,00,000",
-        applications: 10,
-        createdAt: "2023-12-05",
-        ownerId: '7'
-      },
       // Other existing projects
       // {
       //   id: 4,
@@ -220,7 +136,7 @@ export const ProjectProvider = ({ children }) => {
         industry: "E-commerce",
         requiredSkills: ["Node.js", "React", "MongoDB", "Payment Integration"],
         teamMembers: [
-          { id: 3, name: "Priya Sharma", role: "Founder", avatar: "/api/placeholder/40/40" }
+          { id: 3, name: "Priya Sharma", role: "Founder", avatar: "/api/placeholder/40/40", email: "priya@example.com" }
         ],
         openPositions: [
           { role: "Full Stack Developer", skills: ["MERN Stack"], isPaid: false },
@@ -361,8 +277,8 @@ export const ProjectProvider = ({ children }) => {
         industry: "Automotive",
         requiredSkills: ["IoT", "Mobile Development", "Payment Integration", "Maps API"],
         teamMembers: [
-          { id: 16, name: "Rohan Sharma", role: "Founder", avatar: "/api/placeholder/40/40" },
-          { id: 17, name: "Aditya Verma", role: "Hardware Engineer", avatar: "/api/placeholder/40/40" }
+          { id: 16, name: "Rohan Sharma", role: "Founder", avatar: "/api/placeholder/40/40", email: "rohan@example.com" },
+          { id: 17, name: "Aditya Verma", role: "Hardware Engineer", avatar: "/api/placeholder/40/40", email: "aditya@example.com" }
         ],
         openPositions: [
           { role: "Backend Developer", skills: ["Node.js", "MongoDB"], isPaid: true },
@@ -372,39 +288,11 @@ export const ProjectProvider = ({ children }) => {
         applications: 22,
         createdAt: "2023-12-20",
         ownerId: '16'
-      },
-      // User-2's project for testing notifications
-      {
-        id: 'user2-project1',
-        title: "User-2's Test Project",
-        description: "A test project owned by User-2 to verify notification functionality when users apply to positions.",
-        stage: "MVP Development",
-        industry: "Technology",
-        requiredSkills: ["React", "Node.js", "JavaScript"],
-        teamMembers: [
-          { id: '2', name: "User-2", role: "Founder", avatar: "/api/placeholder/40/40" }
-        ],
-        openPositions: [
-          { role: "Frontend Developer", skills: ["React", "JavaScript", "CSS"], isPaid: true },
-          { role: "Backend Developer", skills: ["Node.js", "Express", "MongoDB"], isPaid: false }
-        ],
-        funding: "₹20,00,000",
-        applications: 0,
-        createdAt: "2024-02-01",
-        ownerId: '2'
       }
     ];
 
     // Create user project mapping
     const projectMap = {
-      '1': {
-        ownedProjects: ['p1', 'p2', '4'],
-        participatingProjects: ['p3', 'p4']
-      },
-      '2': {
-        ownedProjects: ['user2-project1'],
-        participatingProjects: []
-      },
       '3': {
         ownedProjects: ['5'],
         participatingProjects: []
