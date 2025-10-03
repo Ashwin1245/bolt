@@ -1,0 +1,23 @@
+## Key features backend must include:
+- The backend, built with Node.js and Express.js, should manage authentication via JWT, store all platform data in MongoDB or MySQL, and expose RESTful APIs for smooth interaction.
+
+- The server architecture must include clearly defined API routes to handle:
+User Accounts: Registration, login, profile management, and skill updates.
+
+- Project Management: Creation, retrieval, update, and deletion of project cards, including vision, descriptions, and stages.
+
+- Team Management: Adding, removing, and assigning roles to team members within projects.
+
+- Application Handling: Submission, retrieval, and status updates for project applications.
+
+- Collaboration Features: APIs for real-time chat messages, task creation and assignment, and file uploads/downloads within project spaces.
+
+- Search and Filtering: Endpoints to support complex queries for projects and users.
+
+- Competition Management: APIs for managing hackathons, leaderboards, and prize distribution.
+
+- Admin Functionality: Secure APIs for administrative tasks like user moderation, project approval, and content management.
+
+## Note:
+To maintain clarity and organization, separate files should be created for frontend components, backend logic, server configuration, and API integration, ensuring clean code and maintainability. The development process should prioritize performance optimization and scalability while staying strictly within the constraints of React JSX, avoiding TypeScript. Additionally, all currency-related transactions and price displays (e.g., for competition prizes or future premium features) should use Indian currency (INR ₹) to align with regional financial standards. This structured approach will result in a fully functional and modernized clone of Solvearn.net, ready for deployment and future expansion.
+
