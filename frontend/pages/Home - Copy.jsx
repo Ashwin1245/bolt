@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
 import { Rocket, Search, ArrowRight, Users, Lightbulb, Trophy, Target, GitBranch, MessageSquare, Shield, Zap } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import './Home.css';
@@ -46,60 +47,8 @@ function Home({ onAuthClick }) {
 
       </section>
 
-      {/* Features Section */}
-      <section id="features" className="our-features-section">
-        <div className="features-header">
-          <p className="features-label">OUR FEATURES</p>
-<h2 className="features-title">See Your Journey With Squad.net</h2>
-          <p className="features-subtitle">
-            From user onboarding to project collaboration, our comprehensive platform streamlines every step of your startup journey with integrated tools and community support.
-          </p>
-        </div>
-        <div className="features-grid-new">
-          <div className="feature-card-new">
-            <div className="feature-icon-new">
-              <Users size={24} />
-            </div>
-            <h3>User Onboarding</h3>
-            <p>Intuitive registration, login, and profile creation.</p>
-          </div>
-          <div className="feature-card-new">
-            <div className="feature-icon-new">
-              <Target size={24} />
-            </div>
-            <h3>Project Creation</h3>
-            <p>Guided flow to list projects and define team needs.</p>
-          </div>
-          <div className="feature-card-new">
-            <div className="feature-icon-new">
-              <Search size={24} />
-            </div>
-            <h3>Project Discovery</h3>
-            <p>Advanced browsing and filtering to find projects.</p>
-          </div>
-          <div className="feature-card-new">
-            <div className="feature-icon-new">
-              <GitBranch size={24} />
-            </div>
-            <h3>Application Management</h3>
-            <p>Apply to projects and manage applications easily.</p>
-          </div>
-          <div className="feature-card-new">
-            <div className="feature-icon-new">
-              <MessageSquare size={24} />
-            </div>
-            <h3>Real-time Collaboration</h3>
-            <p>Integrated chat, task tracking, and file sharing.</p>
-          </div>
-          <div className="feature-card-new">
-            <div className="feature-icon-new">
-              <Trophy size={24} />
-            </div>
-            <h3>Hackathon Tracking</h3>
-            <p>Join hackathons, track progress, and win prizes.</p>
-          </div>
-        </div>
-      </section>
+      {/* Features Section - Horizontal Scroll on Vertical Scroll */}
+      <FeaturesHorizontal />
 
       {/* Project Stages Section */}
       <section className="stages-section">
@@ -275,3 +224,126 @@ function Home({ onAuthClick }) {
 }
 
 export default Home;
+
+function FeaturesHorizontal() {
+  const sectionRef = useRef(null);
+  const [progress, setProgress] = useState(0); // 0..1 overall
+  const [activeIndex, setActiveIndex] = useState(0);
+  const slideCount = 6;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const el = sectionRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const viewportH = window.innerHeight;
+      const totalScroll = viewportH * (slideCount - 1);
+      const start = rect.top;
+      const traveled = Math.min(Math.max(-start, 0), totalScroll);
+      const p = totalScroll > 0 ? traveled / totalScroll : 0;
+      setProgress(p);
+      setActiveIndex(Math.round(p * (slideCount - 1)));
+    };
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, []);
+
+  // Touch support: swipe left/right to move between slides
+  const touchStartX = useRef(0);
+  const touchDeltaX = useRef(0);
+  const isTouching = useRef(false);
+
+  const onTouchStart = (e) => {
+    isTouching.current = true;
+    touchStartX.current = e.touches[0].clientX;
+    touchDeltaX.current = 0;
+  };
+  const onTouchMove = (e) => {
+    if (!isTouching.current) return;
+    touchDeltaX.current = e.touches[0].clientX - touchStartX.current;
+  };
+  const onTouchEnd = () => {
+    if (!isTouching.current) return;
+    isTouching.current = false;
+    const threshold = 50;
+    if (touchDeltaX.current > threshold && activeIndex > 0) {
+      scrollToSlide(activeIndex - 1);
+    } else if (touchDeltaX.current < -threshold && activeIndex < slideCount - 1) {
+      scrollToSlide(activeIndex + 1);
+    }
+  };
+
+  const scrollToSlide = (index) => {
+    const targetProgress = index / (slideCount - 1);
+    const el = sectionRef.current;
+    if (!el) return;
+    const viewportH = window.innerHeight;
+    const totalScroll = viewportH * (slideCount - 1);
+    const containerTop = el.getBoundingClientRect().top + window.scrollY;
+    const targetY = containerTop + targetProgress * totalScroll;
+    window.scrollTo({ top: targetY, behavior: 'smooth' });
+  };
+
+  const translateXPercent = -(progress * (100 * (slideCount - 1)));
+
+  return (
+    <section id="features" className="features-horizontal" ref={sectionRef}>
+      <div className="features-sticky">
+        <div className="features-left">
+          <div className="features-header left">
+            <p className="features-label">OUR FEATURES</p>
+            <h2 className="features-title">See Your Journey With Squad.net</h2>
+            <p className="features-subtitle">
+              From user onboarding to project collaboration, our comprehensive platform streamlines every step of your startup journey with integrated tools and community support.
+            </p>
+          </div>
+        </div>
+        <div className="features-right" onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
+          <div className="features-viewport">
+            <div
+              className="features-track"
+              style={{ transform: `translate3d(${translateXPercent}%, 0, 0)` }}
+            >
+              <FeatureSlide icon={<Users size={24} />} title="User Onboarding" desc="Intuitive registration, login, and profile creation." />
+              <FeatureSlide icon={<Target size={24} />} title="Project Creation" desc="Guided flow to list projects and define team needs." />
+              <FeatureSlide icon={<Search size={24} />} title="Project Discovery" desc="Advanced browsing and filtering to find projects." />
+              <FeatureSlide icon={<GitBranch size={24} />} title="Application Management" desc="Apply to projects and manage applications easily." />
+              <FeatureSlide icon={<MessageSquare size={24} />} title="Real-time Collaboration" desc="Integrated chat, task tracking, and file sharing." />
+              <FeatureSlide icon={<Trophy size={24} />} title="Hackathon Tracking" desc="Join hackathons, track progress, and win prizes." />
+            </div>
+          </div>
+          <div className="features-indicators">
+            <div className="dots">
+              {Array.from({ length: slideCount }).map((_, i) => (
+                <button
+                  key={i}
+                  className={"dot" + (i === activeIndex ? " active" : "")}
+                  aria-label={`Go to slide ${i + 1}`}
+                  onClick={() => scrollToSlide(i)}
+                />
+              ))}
+            </div>
+            <div className="progress-bar" aria-hidden>
+              <div className="progress-fill" style={{ width: `${progress * 100}%` }} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FeatureSlide({ icon, title, desc }) {
+  return (
+    <div className="feature-slide">
+      <div className="feature-icon-new">{icon}</div>
+      <h3>{title}</h3>
+      <p>{desc}</p>
+    </div>
+  );
+}
