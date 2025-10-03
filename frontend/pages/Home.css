@@ -199,6 +199,86 @@
   margin: 0 auto;
 }
 
+/* Stages Section */
+.stages-section {
+  padding: 6rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.stages-timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.stage-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 1.75rem;
+  position: relative;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.stage-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(37,99,235,0.18);
+  border-color: #93c5fd;
+}
+
+.stage-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  color: #ffffff;
+  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+}
+
+.stage-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+  color: #111827;
+}
+
+.stage-card p {
+  margin: 0 0 0.75rem 0;
+  color: #6b7280;
+}
+
+.stage-card ul {
+  margin: 0 0 2.25rem 0;
+  padding-left: 1.25rem;
+  color: #374151;
+}
+
+.stage-card ul li {
+  margin: 0.35rem 0;
+}
+
+.stage-badge {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #1e40af;
+  background: #dbeafe;
+  border: 1px solid #bfdbfe;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+}
+
+.stage-card.validation .stage-icon { background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%); }
+.stage-card.mvp .stage-icon { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+.stage-card.launch .stage-icon { background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%); }
+.stage-card.scale .stage-icon { background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%); }
+
 .section-header {
   text-align: center;
   margin-bottom: 3rem !important;
@@ -549,6 +629,8 @@
     padding: 2rem 1rem;
     text-align: center;
   }
+  .stages-section { padding: 4rem 1rem; }
+  .stages-timeline { grid-template-columns: 1fr; }
   
   .hero-title {
     font-size: 2.5rem;

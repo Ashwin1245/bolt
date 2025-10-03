@@ -125,20 +125,78 @@ function Home({ onAuthClick }) {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="features-section">
+      {/* Project Stages Section */}
+      <section className="stages-section">
         <div className="section-header">
-          <h2>Everything you need to build your startup</h2>
-          <p>Comprehensive tools and community to turn your ideas into successful ventures</p>
+          <h2>Project stages from idea to scale</h2>
+          <p>Understand where your project is and what to do next.</p>
         </div>
-        <div className="features-grid">
-          {features.map((feature, index) => (
-            <div key={index} className="feature-card">
-              <div className="feature-icon">{feature.icon}</div>
-              <h3>{feature.title}</h3>
-              <p>{feature.description}</p>
+        <div className="stages-timeline">
+          <div className="stage-card ideation">
+            <div className="stage-icon">
+              <Lightbulb size={24} />
             </div>
-          ))}
+            <h3>Ideation</h3>
+            <p>Define the problem, research the space, and outline the solution.</p>
+            <ul>
+              <li>Write problem statement</li>
+              <li>Market and competitor scan</li>
+              <li>Create lean canvas</li>
+            </ul>
+            <span className="stage-badge">Start here</span>
+          </div>
+          <div className="stage-card validation">
+            <div className="stage-icon">
+              <Target size={24} />
+            </div>
+            <h3>Validation</h3>
+            <p>Test assumptions with users and validate demand before building.</p>
+            <ul>
+              <li>Customer interviews</li>
+              <li>Landing page + waitlist</li>
+              <li>Pilot or concierge test</li>
+            </ul>
+            <span className="stage-badge">De‑risk</span>
+          </div>
+          <div className="stage-card mvp">
+            <div className="stage-icon">
+              <GitBranch size={24} />
+            </div>
+            <h3>MVP</h3>
+            <p>Build a minimal version focused on the core value proposition.</p>
+            <ul>
+              <li>Scope v1 features</li>
+              <li>Ship fast, measure usage</li>
+              <li>Iterate from feedback</li>
+            </ul>
+            <span className="stage-badge">Build</span>
+          </div>
+          <div className="stage-card launch">
+            <div className="stage-icon">
+              <Rocket size={24} />
+            </div>
+            <h3>Launch</h3>
+            <p>Release publicly, announce widely, and onboard early adopters.</p>
+            <ul>
+              <li>Public release checklist</li>
+              <li>Go‑to‑market plan</li>
+              <li>Monitor KPIs</li>
+            </ul>
+            <span className="stage-badge">Go live</span>
+          </div>
+          <div className="stage-card scale">
+            <div className="stage-icon">
+              <Users size={24} />
+            </div>
+            <h3>Scale</h3>
+            <p>Grow usage, strengthen the team, and optimize for reliability.</p>
+            <ul>
+              <li>Growth experiments</li>
+              <li>Team hiring</li>
+              <li>Security & reliability</li>
+            </ul>
+            <span className="stage-badge">Grow</span>
+          </div>
         </div>
       </section>
 
