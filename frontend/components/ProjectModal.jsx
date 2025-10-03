@@ -296,7 +296,7 @@ function ProjectModal({ project, onClose }) {
       //   );
 
       default:
-        return null
+        return null;
     }
   };
 

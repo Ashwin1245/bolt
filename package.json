@@ -1,5 +1,6 @@
 {
   "name": "squad-net",
+  "homepage": "https://Ashwin1245.github.io/bolt/",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -10,7 +11,9 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "server": "node backend/server.js",
-    "dev:server": "nodemon backend/server.js"
+    "dev:server": "nodemon backend/server.js" ,
+    "predeploy": "npm run build",
+    "deploy": "gh-page -d dist" 
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",
