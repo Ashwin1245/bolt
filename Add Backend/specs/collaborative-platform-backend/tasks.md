@@ -1,6 +1,6 @@
 # Implementation Plan
 
-- [ ] 1. Set up core backend infrastructure and configuration
+- [-] 1. Set up core backend infrastructure and configuration
   - Create database configuration files for MongoDB and MySQL connections
   - Set up environment variable management and JWT configuration
   - Create global middleware for authentication, validation, and error handling
