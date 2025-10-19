@@ -248,6 +248,46 @@ export const ProjectProvider = ({ children }) => {
         applications: 18,
         createdAt: "2024-01-03",
         ownerId: '13'
+      },
+      {
+        id: 11,
+        title: "Sustainable Agriculture Platform",
+        description: "Connecting farmers with technology solutions for sustainable farming practices, crop monitoring, and direct market access.",
+        stage: "Ideation Stage",
+        industry: "Agriculture",
+        requiredSkills: ["IoT", "Mobile Development", "Data Analytics", "Agriculture"],
+        teamMembers: [
+          { id: 15, name: "Karan Patel", role: "Founder", avatar: "/api/placeholder/40/40" }
+        ],
+        openPositions: [
+          { role: "IoT Developer", skills: ["Arduino", "Sensors", "Embedded Systems"], isPaid: false },
+          { role: "Mobile Developer", skills: ["React Native"], isPaid: true },
+          { role: "Agriculture Expert", skills: ["Farming", "Sustainability"], isPaid: false }
+        ],
+        funding: "₹20,00,000",
+        applications: 7,
+        createdAt: "2024-01-28",
+        ownerId: '15'
+      },
+      {
+        id: 12,
+        title: "Electric Vehicle Charging Network",
+        description: "Building a nationwide network of smart EV charging stations with real-time availability tracking and seamless payment.",
+        stage: "MVP Development",
+        industry: "Automotive",
+        requiredSkills: ["IoT", "Mobile Development", "Payment Integration", "Maps API"],
+        teamMembers: [
+          { id: 16, name: "Rohan Sharma", role: "Founder", avatar: "/api/placeholder/40/40", email: "rohan@example.com" },
+          { id: 17, name: "Aditya Verma", role: "Hardware Engineer", avatar: "/api/placeholder/40/40", email: "aditya@example.com" }
+        ],
+        openPositions: [
+          { role: "Backend Developer", skills: ["Node.js", "MongoDB"], isPaid: true },
+          { role: "Mobile Developer", skills: ["React Native", "Maps Integration"], isPaid: true }
+        ],
+        funding: "₹60,00,000",
+        applications: 22,
+        createdAt: "2023-12-20",
+        ownerId: '16'
       }
     ];
 
