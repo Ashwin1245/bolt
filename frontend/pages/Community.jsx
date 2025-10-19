@@ -252,6 +252,17 @@ function Community() {
   const [expandedComments, setExpandedComments] = useState(new Set());
   const [commentInputs, setCommentInputs] = useState({});
 
+  // Map user role to display title (match Profile page behavior)
+  const getRoleDisplayTitle = (role) => {
+    const roleMap = {
+      'founder': 'The Founder',
+      'professional': 'The Professional',
+      'investor': 'The Investor',
+      'student': 'The Student'
+    };
+    return roleMap[role] || role || 'Developer';
+  };
+
   // Mock data - in a real app, this would come from an API
   // Updated category options for filtering posts
   const categories = ['General', 'Announcements', 'Project Showcase', 'Job Opportunities', 'Help & Support'];
@@ -262,6 +273,7 @@ function Community() {
       id: '1',
       name: 'Ankit Kumar',
       title: 'Full Stack Developer',
+      role: 'professional',
       location: 'Bangalore, India',
       bio: 'Passionate full-stack developer with 5+ years of experience in React, Node.js, and cloud technologies. Love building scalable applications and mentoring junior developers.',
       email: 'ankit.kumar@example.com',
@@ -297,6 +309,7 @@ function Community() {
       id: '2',
       name: 'Priya Sharma',
       title: 'UI/UX Designer',
+      role: 'professional',
       location: 'Mumbai, India',
       bio: 'Creative UI/UX designer with expertise in user-centered design and design systems. Passionate about creating intuitive and accessible digital experiences.',
       email: 'priya.sharma@example.com',
@@ -332,6 +345,7 @@ function Community() {
       id: '3',
       name: 'Rahul Verma',
       title: 'Product Manager',
+      role: 'professional',
       location: 'Delhi, India',
       bio: 'Strategic product manager with experience in fintech and blockchain technologies. Focused on building products that solve real-world problems.',
       email: 'rahul.verma@example.com',
@@ -483,7 +497,11 @@ function Community() {
       // First check mock members (for demo users)
       const mockMember = mockMembers.find(m => m.id === memberId);
       if (mockMember) {
-        setSelectedMember(mockMember);
+        const profileData = {
+          ...mockMember,
+          title: mockMember.title || getRoleDisplayTitle(mockMember.role)
+        };
+        setSelectedMember(profileData);
         setShowProfileModal(true);
         return;
       }
@@ -497,7 +515,7 @@ function Community() {
         // Transform backend data to match ProfileModal expected format
         const profileData = {
           ...userProfile,
-          title: userProfile.title || userProfile.role || 'Member',
+          title: userProfile.title || getRoleDisplayTitle(userProfile.role),
           experiences: userProfile.experience || [],
           // Keep skills as array for ProfileModal
           skills: Array.isArray(userProfile.skills) ? userProfile.skills : [],
@@ -520,7 +538,7 @@ function Community() {
       if (user && user.id === memberId) {
         const profileData = {
           ...user,
-          title: user.title || user.role || 'Member',
+          title: user.title || getRoleDisplayTitle(user.role),
           experiences: user.experience || [],
           skills: Array.isArray(user.skills) ? user.skills : []
         };
@@ -567,7 +585,7 @@ function Community() {
       id: Date.now().toString(),
       userId: user?.id || '0',
       author: user?.name || 'Guest User',
-      authorTitle: user?.title || user?.role || 'Member',
+      authorTitle: user?.title || getRoleDisplayTitle(user?.role),
       content: postData.content,
       timestamp: 'Just now',
       likes: 0,

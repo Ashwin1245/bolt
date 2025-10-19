@@ -127,10 +127,6 @@ function AuthModal({ onClose, onSuccess }) {
         <div className="auth-content">
           {/* Demo Users Section removed */}
 
-          <div className="divider">
-            <span>or</span>
-          </div>
-
           <form onSubmit={handleSubmit} className="auth-form">
             {!isLogin && (
               <div className="form-group">

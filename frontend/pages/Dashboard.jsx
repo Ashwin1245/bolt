@@ -165,7 +165,13 @@ function Dashboard() {
     // Find the selected user from applications
     const application = applications.find(app => app.applicantId === applicantId);
     if (application && application.userDetails) {
-      setSelectedUser(application.userDetails);
+      // If viewing from "Sent" section, show current user's profile
+      // If viewing from "Received" section, show applicant's profile
+      if (applicationTab === 'sent') {
+        setSelectedUser(user);
+      } else {
+        setSelectedUser(application.userDetails);
+      }
     }
   };
 
