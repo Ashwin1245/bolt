@@ -16,6 +16,7 @@ function AuthModal({ onClose, onSuccess }) {
   });
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
+  const { addAuthNotification } = useNotifications();
 
   const handleInputChange = (e) => {
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
