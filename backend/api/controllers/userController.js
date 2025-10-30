@@ -15,7 +15,7 @@ const userController = {
   // Get user by ID
   getUserById: asyncHandler(async (req, res) => {
     const { id } = req.params;
-    const user = users.find(u => u.id === id);
+    const user = await User.findById(id).select('-password');
 
     if (!user) {
       return res.status(404).json(
