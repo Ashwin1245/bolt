@@ -127,17 +127,20 @@ const userController = {
     const { id } = req.params;
     const profileData = req.body;
 
-    const userIndex = users.findIndex(u => u.id === id);
-    if (userIndex === -1) {
+    const user = await User.findById(id);
+    if (!user) {
       return res.status(404).json(
         errorResponse('User not found', 'USER_NOT_FOUND')
       );
     }
 
     // Update user profile with new data
-    users[userIndex].update(profileData);
+    Object.assign(user, profileData);
+    user.updatedAt = Date.now();
+    await user.save();
 
-    const response = successResponse(users[userIndex], 'Profile updated successfully');
+    const updated = await User.findById(user._id).select('-password');
+    const response = successResponse(updated, 'Profile updated successfully');
     res.json(response);
   }),
 
