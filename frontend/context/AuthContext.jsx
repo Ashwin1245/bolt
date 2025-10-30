@@ -90,6 +90,7 @@ export const AuthProvider = ({ children }) => {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': token ? `Bearer ${token}` : ''
           },
           body: JSON.stringify(profileData),
         });
