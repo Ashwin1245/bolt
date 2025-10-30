@@ -148,20 +148,17 @@ const userController = {
   deleteUser: asyncHandler(async (req, res) => {
     const { id } = req.params;
 
-    const userIndex = users.findIndex(u => u.id === id);
-    if (userIndex === -1) {
+    const user = await User.findByIdAndDelete(id);
+    if (!user) {
       return res.status(404).json(
         errorResponse('User not found', 'USER_NOT_FOUND')
       );
     }
 
-    // Remove user from array
-    const deletedUser = users.splice(userIndex, 1)[0];
-
     // Remove user projects
     delete userProjects[id];
 
-    const response = successResponse(deletedUser, 'User deleted successfully');
+    const response = successResponse(user, 'User deleted successfully');
     res.json(response);
   })
 };
