@@ -47,7 +47,9 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setUser(null);
+    setToken(null);
     localStorage.removeItem('solvearn_user');
+    localStorage.removeItem('solvearn_token');
   };
 
   const signup = async (userData) => {
