@@ -76,8 +76,8 @@ const userController = {
     const { id } = req.params;
     const { name, email } = req.body;
 
-    const userIndex = users.findIndex(u => u.id === id);
-    if (userIndex === -1) {
+    const user = await User.findById(id);
+    if (!user) {
       return res.status(404).json(
         errorResponse('User not found', 'USER_NOT_FOUND')
       );
@@ -92,7 +92,7 @@ const userController = {
     }
 
     // Check if email is taken by another user
-    const emailExists = users.find(u => u.email === email && u.id !== id);
+    const emailExists = await User.findOne({ email, _id: { $ne: id } });
     if (emailExists) {
       return res.status(409).json(
         errorResponse('Email already exists', 'EMAIL_EXISTS')
@@ -100,9 +100,10 @@ const userController = {
     }
 
     // Update user
-    users[userIndex].update({ name, email });
+    user.update(req.body);
+    await user.save();
 
-    const response = successResponse(users[userIndex], 'User updated successfully');
+    const response = successResponse(user, 'User updated successfully');
     res.json(response);
   }),
 
