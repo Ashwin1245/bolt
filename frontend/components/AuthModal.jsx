@@ -28,27 +28,58 @@ function AuthModal({ onClose, onSuccess }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validate password match on signup
+    if (!isLogin && formData.password !== formData.confirmPassword) {
+      addAuthNotification('error', 'Passwords do not match');
+      return;
+    }
+
     setLoading(true);
 
-    // Simulate API call
-    setTimeout(() => {
-      const userData = {
-        id: Date.now(),
-        name: formData.fullName || formData.email.split('@')[0],
-        email: formData.email,
-        role: 'user',
-        avatar: '/api/placeholder/40/40',
-        // For existing users, simulate having profile data
-        bio: isLogin ? 'Experienced developer passionate about building innovative solutions' : '',
-        skills: isLogin ? ['React', 'Node.js', 'JavaScript'] : [],
-        experience: isLogin ? '2-3' : '',
-        location: isLogin ? 'Mumbai, India' : ''
-      };
+    try {
+      // Determine endpoint
+      const endpoint = isLogin ? '/api/auth/signin' : '/api/auth/signup';
 
-      login(userData);
+      // Prepare request body
+      const requestBody = isLogin
+        ? { email: formData.email, password: formData.password }
+        : { name: formData.fullName, email: formData.email, password: formData.password };
+
+      // Make fetch request
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Extract token and user from response
+        const { token, user } = data.data;
+
+        // Store token and call login
+        localStorage.setItem('solvearn_token', token);
+        login(user, token);
+
+        // Show success notification
+        addAuthNotification('success', isLogin ? 'Welcome back!' : 'Account created successfully!');
+
+        // Call onSuccess
+        onSuccess(user);
+      } else {
+        // Show error notification
+        addAuthNotification('error', data.message || 'Authentication failed');
+      }
+    } catch (error) {
+      // Network error
+      addAuthNotification('error', 'Network error. Please check your connection.');
+    } finally {
       setLoading(false);
-      onSuccess(userData);
-    }, 1000);
+    }
   };
 
   const handleGoogleAuth = () => {
