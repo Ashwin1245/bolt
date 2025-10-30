@@ -1,8 +1,5 @@
-import User from '../../backend/models/User.js';
-import { successResponse, errorResponse, asyncHandler } from '../../backend/utils/helpers.js';
-
-// In-memory storage (demo users removed)
-let users = [];
+import User from '../../models/User.js';
+import { successResponse, errorResponse, asyncHandler } from '../../utils/helpers.js';
 
 // Track user's projects and participations
 const userProjects = {};
