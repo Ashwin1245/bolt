@@ -516,3 +516,17 @@ Project filtering → Only shows messages for selected project
 Move the 'social-auth' button downside of 'form-options' 'auth-form' And add 'divider' befor the button
 ---------------------------------------
 comments down the code of Demo User (User 1 & User 2) end to end  
+-----------------------------------------------
+Setup all api end to end point with Frontend & Backend & Set Up proper Flow & store data in mongodb of
+
+- User Sign Up/In
+
+ - Project Creaction & Delete With (edit)
+
+- Profile Update on Real Time
+
+ - Dashboard Update On Real Time Data
+
+ - Notification
+
+- Handle CollaborationSpace (Message , File Upload , TasksTab & Mamber Tab)
