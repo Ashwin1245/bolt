@@ -56,7 +56,7 @@ const userController = {
     }
 
     // Check if email already exists
-    const existingUser = users.find(u => u.email === email);
+    const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(409).json(
         errorResponse('Email already exists', 'EMAIL_EXISTS')
@@ -64,16 +64,10 @@ const userController = {
     }
 
     // Create new user
-    const newUser = User.create({ name, email });
-    users.push(newUser);
+    const user = new User({ name, email });
+    await user.save();
 
-    // Initialize empty projects for the new user
-    userProjects[newUser.id] = {
-      ownedProjects: [],
-      participatingProjects: []
-    };
-
-    const response = successResponse(newUser, 'User created successfully');
+    const response = successResponse(user, 'User created successfully');
     res.status(201).json(response);
   }),
 
