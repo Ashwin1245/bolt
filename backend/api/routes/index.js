@@ -38,6 +38,10 @@ router.get('/', (req, res) => {
     endpoints: {
       hello: 'GET /api/hello',
       contact: 'POST /api/contact',
+      auth: {
+        signup: 'POST /api/auth/signup',
+        signin: 'POST /api/auth/signin'
+      },
       users: {
         getAll: 'GET /api/users',
         getById: 'GET /api/users/:id',
