@@ -16,6 +16,10 @@ router.get('/hello', helloController.getHello);
 // Contact endpoints
 router.post('/contact', contactController.submitContact);
 
+// Authentication endpoints
+router.post('/auth/signup', authController.signup);
+router.post('/auth/signin', authController.signin);
+
 // User endpoints
 router.get('/users', userController.getAllUsers);
 router.get('/users/:id', userController.getUserById);
