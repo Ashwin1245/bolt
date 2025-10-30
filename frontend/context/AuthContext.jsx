@@ -26,6 +26,10 @@ export const AuthProvider = ({ children }) => {
     if (savedUser) {
       setUser(JSON.parse(savedUser));
     }
+    const savedToken = localStorage.getItem('solvearn_token');
+    if (savedToken) {
+      setToken(savedToken);
+    }
     setLoading(false);
   }, []);
 
