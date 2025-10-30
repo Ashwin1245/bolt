@@ -530,3 +530,6 @@ Setup all api end to end point with Frontend & Backend & Set Up proper Flow & st
  - Notification
 
 - Handle CollaborationSpace (Message , File Upload , TasksTab & Mamber Tab)
+----------------------------------------
+ I want to connect the supabase to this project Give me the Step to connect the supabase & Good Prompt
+
