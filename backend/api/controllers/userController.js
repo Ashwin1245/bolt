@@ -7,6 +7,7 @@ const userProjects = {};
 const userController = {
   // Get all users
   getAllUsers: asyncHandler(async (req, res) => {
+    const users = await User.find().select('-password');
     const response = successResponse(users, 'Users retrieved successfully');
     res.json(response);
   }),
