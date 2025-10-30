@@ -188,6 +188,7 @@ export const NotificationProvider = ({ children }) => {
         addApplicationNotification,
         addAcceptanceNotification,
         addRejectionNotification,
+        addAuthNotification,
         markAsRead,
         markAllAsRead,
         removeNotification
