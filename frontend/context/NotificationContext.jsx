@@ -134,6 +134,17 @@ export const NotificationProvider = ({ children }) => {
         }));
     };
 
+    // Add auth notification (success or error)
+    const addAuthNotification = (type, message) => {
+        // Use browser alert for simplicity
+        // Type is 'success' or 'error'
+        if (type === 'error') {
+            alert(`Error: ${message}`);
+        } else {
+            alert(`Success: ${message}`);
+        }
+    };
+
     // Mark notification as read for current user
     const markAsRead = (notificationId) => {
         if (!user?.id) return;
