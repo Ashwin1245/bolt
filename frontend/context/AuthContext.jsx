@@ -33,9 +33,13 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  const login = async (userData) => {
+  const login = async (userData, authToken) => {
     // Store profile data if it's a new user or has extended profile info
     const storedUser = await storeUserProfile(userData);
+    if (authToken) {
+      setToken(authToken);
+      localStorage.setItem('solvearn_token', authToken);
+    }
     setUser(storedUser);
     localStorage.setItem('solvearn_user', JSON.stringify(storedUser));
     setShowAuthModal(false);
