@@ -533,3 +533,36 @@ Setup all api end to end point with Frontend & Backend & Set Up proper Flow & st
 ----------------------------------------
  I want to connect the supabase to this project Give me the Step to connect the supabase & Good Prompt
 
+--------------------------------------------
+ Setup all Backend & connect the API end to end point with Frontend & Backend & Set Up proper Flow & store data in supabase  
+- User can able to Sign Up/In (with OnboardingModal details)  
+- Project Creaction & Delete With (edit)  
+- Update the Profilemodal & Profile Page on Real Time   
+- Dashboard Update On Real Time Data   
+- Notification  
+- Handle CollaborationSpace (Message , File Upload , TasksTab & Mamber Tab)
+----------------------------------------
+- User can able to Sign Up/In (with OnboardingModal details)  
+
+- Update the Profilemodal & Profile Page on Real Time 
+---------------------------------------------
+New IP: 223.228.44.5/32
+--------------------------------------------------
+If User apply the project project with (Uplode file )
+
+- The project owner go the nofification
+
+- Update the Dashbord of Both User ( Rescive & Send ) Section with correct details  
+
+- The project Owner able to downlode the which is  uplode file by User (Projectmodal.jsx) 
+
+- Update with real time  DB
+---------------------------------------------------
+If User apply the project project with (Uplode file ) updated the data in real time with DB
+
+- The Project Owner can accept or reject the application 
+
+- Update the Dashbord of Both User ( Rescive & Send ) Section with correct details 
+-----------------------------------------------------
+I see! The acceptApplication and rejectApplication functions are only updating local state, not calling the backend API. Let me update them to call the backend:
+------------------------------------------
