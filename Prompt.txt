@@ -546,8 +546,7 @@ Setup all api end to end point with Frontend & Backend & Set Up proper Flow & st
 
 - Update the Profilemodal & Profile Page on Real Time 
 ---------------------------------------------
-New IP: 223.228.44.5/32
---------------------------------------------------
+
 If User apply the project project with (Uplode file )
 
 - The project owner go the nofification
